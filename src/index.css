@@ -1,0 +1,482 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none;
+}
+
+:root {
+    --text-color: #3a3a3a;
+    --primary-color: rgb(230, 49, 79)
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+.bg-scroll {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow-y: hidden;
+    overflow-x: scroll;
+    pointer-events: none;
+    display: flex;
+}
+
+.bg-scroll img{
+    flex-shrink: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.template {
+    display: flex;
+    flex-direction: column;
+    width: 100dvw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    background-size: cover;
+    backdrop-filter: blur(12px);
+}
+
+
+.template > *{
+    z-index: 10;
+}
+
+.movies {
+    display: flex;
+    margin-top: 60px;
+    width: 100%;
+    overflow-x: scroll;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 20px;
+    transition: all .5s;
+    z-index: 11;
+}
+
+.movies::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+
+.movies.fullscreen {
+    margin-top: -500px;
+    pointer-events: none;
+}
+
+.movie {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    flex-shrink: 0;
+    width: 75%;
+    aspect-ratio: 10/16;
+    padding-inline: 16px;
+}
+
+
+.movie img {
+    border-radius: 12px;
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.5);
+}
+
+.flw {
+    width: 13%;
+    flex-shrink: 0;
+}
+
+.heroParent {
+    z-index: 10;
+    height: 400px;
+    width: 100%;
+    margin-top: -160px;
+    padding-inline: 12%;
+    transition: all .5s;
+    position: absolute;
+    bottom: 40px;
+}
+
+.heroParent.fullscreen {
+    margin-top: 0;
+    height: 100dvh;
+    padding-inline: 0;
+    bottom: 0;
+}
+
+.hero {
+    width: 100%;
+    height: 100%;
+    background-color: #d4cbcb;
+    border-radius: 12px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    transition: all .5s;
+}
+
+.hero.fullscreen {
+    border-radius: 0;
+}
+
+.appBar {
+    padding-top: 0;
+    width: 100%;
+    height: 0;
+    transition: all .5s;
+    opacity: 0;
+    background: linear-gradient(to left, rgb(114, 3, 81), rgb(55, 0, 87));
+}
+
+.appBar.fullscreen {
+    display: flex;
+    align-items: center;
+    height: 80px;
+    padding-top: 25px;
+    opacity: 1;
+}
+
+.arrow-left {
+    color: rgb(171, 173, 175);
+    font-size: 22px;
+    padding-inline: 10px;
+
+}
+
+.cinemaHallParent {
+    width: 100%;
+    height: 120px;
+    transition: all .5s;
+    opacity: 0;
+}
+
+.cinemaHallParent.fullscreen {
+    opacity: 1;
+    height: 400px;
+}
+
+.cinemaHall {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    height: 100%;
+}
+
+.seats {
+    display: flex;
+    flex-wrap: wrap;
+    padding-inline: 40px;
+    gap: 6px;
+    justify-content: center;
+}
+
+.seat {
+    width: 50px;
+    color: rgba(121, 118, 118, 0.5);
+    transition: all .2s;
+    transform: scale(1);
+}
+.seat:active{
+    transform: scale(1.2);
+}
+
+input[type="checkbox"] {
+    display: none;
+}
+
+
+input[type="checkbox"]:checked+.seat {
+    color: var(--primary-color);
+}
+
+.screen {
+    clip-path: polygon(19% 0, 80% 0%, 100% 0, 100% 80%, 80% 100%, 20% 100%, 0% 80%, 0 0);
+    background-color: rgba(121, 118, 118, 0.5);
+    width: 80%;
+    height: 40px;
+}
+
+.hero h1 {
+    color: var(--text-color);
+    font-size: 30px;
+    text-transform: uppercase;
+    line-height: 30px;
+    font-weight: 700;
+    margin-top: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    width: 300px;
+    transition: all .5s;
+}
+
+.hero h1.fullscreen{
+    margin-top: 0;
+}
+
+.dateTimeSelector {
+    display: flex;
+    height: 120px;
+    width: 76%;
+    position: relative;
+    z-index: 10;
+    border: 1px solid rgba(128, 128, 128, 0.5);
+    border-radius: 10px;
+    margin-top: 10px;
+}
+
+
+
+.days {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    font-size: small;
+    font-weight: bolder;
+    scroll-snap-type: y mandatory;
+}
+
+.days div {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    text-transform: uppercase;
+    color: var(--text-color);
+    padding-block: 7px;
+}
+
+.time {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow-y: scroll;
+    font-size: small;
+    font-weight: bolder;
+    scroll-snap-type: y mandatory;
+}
+
+.time div {
+    scroll-snap-align: center;
+    scroll-snap-stop: always;
+    color: var(--text-color);
+    padding-block: 7px;
+}
+
+.flh {
+    height: 38%;
+    flex-shrink: 0;
+}
+
+.time::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+.days::-webkit-scrollbar {
+    background-color: transparent;
+}
+
+
+
+.selector {
+    position: absolute;
+    width: 100%;
+    height: 28%;
+    background-color: rgba(128, 128, 128, 0.281);
+    z-index: -10;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.hero button {
+    height: 58px;
+    background-color: var(--primary-color);
+    width: 100%;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    position: absolute;
+    bottom: 0;
+    transition: all .5s;
+}
+
+
+.hero button.fullscreen {
+    width: 76%;
+    bottom: 40px;
+    box-shadow: 0 10px 10px rgba(121, 2, 2, 0.342);
+}
+
+.paymentParent {
+    width: 100%;
+    height: 100px;
+    transition: all .5s;
+    opacity: 0;
+}
+
+.paymentParent.fullscreen {
+    opacity: 1;
+    width: 76%;
+    height: 170px;
+    transition: all .5s;
+    display: flex;
+    flex-direction: column;
+}
+
+.date-tickets-parent {
+    height: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    align-items: end;
+    font-weight: 600;
+    color: #3a3a3a98;
+}
+
+
+
+.time-tickets-parent {
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    align-items: end;
+    font-weight: 600;
+    color: #3a3a3a98;
+}
+
+
+.cinema-hall-tickets-parent {
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    align-items: end;
+    font-weight: 600;
+    color: #3a3a3a98;
+}
+
+.number-of-tickets-parent {
+    height: 45px;
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.5);
+    align-items: end;
+    font-weight: 600;
+    color: #3a3a3a98;
+}
+
+.fee {
+    display: flex;
+    justify-content: end;
+    font-weight: 800;
+    align-items: center;
+    font-size: 26px;
+    color: #252525e1;
+    width: 76%;
+    transition: all .5s;
+    opacity: 0;
+    height: 60px;
+}
+
+.fee.fullscreen {
+    opacity: 1;
+    width: 76%;
+}
+
+.writing-style {
+    color: #3a3a3ad2;
+    font-weight: 600;
+}
+
+.success {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background-color: #e4dcdc;
+    opacity: 0;
+    transition: all .5s;
+    z-index: 12;
+    pointer-events: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.success.fullscreen {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.top-curtain{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    z-index: 20;
+}
+
+.left-curtain{
+    position: absolute;
+    top: 0;
+    left: -50vw;
+    width: 50vw;
+    height: 100vh;
+    z-index: 19;
+    transition: all 1s;
+}
+.left-curtain.closed{
+    left: 0;
+}
+
+.right-curtain{
+    position: absolute;
+    top: 0;
+    right: -50vw;
+    width: 50vw;
+    height: 100vh;
+    z-index: 19;
+    transition: all 1s;
+}
+.right-curtain.closed{
+    right: 0;
+}
+
+.qr {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.qr-image{
+    width: 60vw;
+}
+
+.success button {
+    height: 58px;
+    background-color: #b01313;
+    width: 100%;
+    border: none;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    transition: all .5s;
+}
+
+button:active{
+    transform: scale(1.2);
+}
