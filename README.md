@@ -7,6 +7,9 @@
 
 ## Demo 
 
+https://github.com/ksckubra1/cinema-mobile-app/assets/100435729/b1c29b69-22cc-479a-9b99-5f6872c2750b
+
+
 
 ## Usage 
  Install dependencies
